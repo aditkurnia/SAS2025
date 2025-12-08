@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Ujian</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="libs/bootstrap-icons.css">
+
+<style>
+    .benar { color: green; font-weight: bold; }
+    .salah { color: red; font-weight: bold; }
+    .kotak-review {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-bottom: 12px;
+        background: #f9f9f9;
+    }
+</style>
+
+</head>
+
+<body>
+<div class="container" id="app">
+    <h2 id="judulMapel"><i class="bi bi-pencil-square"></i> Ujian</h2>
+
+    <div id="soalBox"></div>
+
+    <button id="nextBtn" class="btn">
+        Selanjutnya <i class="bi bi-arrow-right"></i>
+    </button>
+</div>
+
+<script>
+let mapel = new URLSearchParams(window.location.search).get("mapel");
+
+// Load soal berdasarkan mapel (soal_bi.js, soal_pai.js, dll)
+let script = document.createElement("script");
+script.src = "data/soal_" + mapel + ".js";
+document.body.appendChild(script);
+
+script.onload = () => mulaiUjian();
+
+// Variabel
+let soal = [];
+let index = 0;
+let jawabanUser = [];
+
+// Random array
+function acak(arr) {
+    return arr.sort(() => Math.random() - 0.5);
+}
+
+// Mulai ujian
+function mulaiUjian() {
+    document.getElementById("judulMapel").innerHTML =
+        `<i class="bi bi-pencil-square"></i> Ujian: ${mapel.toUpperCase()}`;
+
+    soal = [];
+
+    // gabungkan seluruh bab dari soalData
+    for (let bab in soalData) {
+        soal.push(...acak(soalData[bab]));
+    }
+
+    tampilSoal();
+}
+
+// Tampilkan soal
+function tampilSoal() {
+    if (index >= soal.length) return selesai();
+
+    let s = soal[index];
+
+    document.getElementById("soalBox").innerHTML = `
+        <div><b>Soal ${index + 1} / ${soal.length}</b></div>
+        <p>${s.soal}</p>
+
+        <label><input type="radio" name="jwb" value="a"> ${s.a}</label><br>
+        <label><input type="radio" name="jwb" value="b"> ${s.b}</label><br>
+        <label><input type="radio" name="jwb" value="c"> ${s.c}</label><br>
+        <label><input type="radio" name="jwb" value="d"> ${s.d}</label><br>
+    `;
+}
+
+// Tombol Next
+document.getElementById("nextBtn").onclick = () => {
+
+    let pilih = document.querySelector("input[name=jwb]:checked");
+
+    if (!pilih) {
+        alert("Pilih jawaban dulu!");
+        return;
+    }
+
+    jawabanUser.push(pilih.value);
+    index++;
+    tampilSoal();
+};
+
+
+
+// ===============================
+//    SELESAI – TAMPILKAN REVIEW
+// ===============================
+function selesai() {
+
+    let benar = 0;
+    let reviewHTML = `
+        <h2><i class="bi bi-clipboard-check"></i> Nilai Kamu</h2>
+        <h3>${benar} / ${soal.length}</h3>
+        <hr>
+        <h3><i class="bi bi-journal-text"></i> Review Lengkap Jawaban</h3>
+    `;
+
+    soal.forEach((s, i) => {
+        let user = jawabanUser[i];
+        let correct = s.jawaban;
+        let status = (user === correct);
+
+        if (status) benar++;
+
+        reviewHTML += `
+            <div class="kotak-review">
+                <b>Soal ${i+1}:</b>
+                <p>${s.soal}</p>
+
+                <p>
+                    <i class="bi bi-person-check"></i> Jawaban kamu:
+                    <span class="${status ? 'benar' : 'salah'}">
+                        ${user.toUpperCase()} – ${s[user]}
+                    </span>
+                </p>
+
+                ${
+                    status
+                    ? `<p class="benar"><i class="bi bi-check-circle"></i> Benar</p>`
+                    :
+                    `
+                    <p class="salah">
+                        <i class="bi bi-x-circle"></i> Salah
+                    </p>
+
+                    <p>
+                        <i class="bi bi-check-lg"></i> Jawaban benar:
+                        <span class="benar">
+                            ${correct.toUpperCase()} – ${s[correct]}
+                        </span>
+                    </p>
+                    `
+                }
+            </div>
+        `;
+    });
+
+    // Tampilkan hasil
+    document.getElementById("app").innerHTML = `
+        <div class="container">
+            <h2><i class="bi bi-bar-chart-line"></i> Hasil Ujian</h2>
+            <h3 class="benar">Benar: ${benar} / ${soal.length}</h3>
+            <hr>
+            ${reviewHTML}
+        </div>
+    `;
+}
+</script>
+
+</body>
+</html>
