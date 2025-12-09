@@ -32,22 +32,118 @@ body {
 
 .footer {
     width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
     background: #111;
-    color: #fff;
-    text-align: center;
-    padding: 20px 0;
-    margin-top: 40px;
-    font-family: Arial, sans-serif;
-    border-radius: 30px 10px 30px 10px;
+    padding: 10px 0;
+    z-index: 999;
 }
 
-.footer span {
+.marquee {
+    width: 100%;
+    overflow: hidden;
+}
+
+.marquee p {
+    display: inline-block;
+    padding-left: 100%;
+    white-space: nowrap;
+    color: #00eaff;
     font-weight: bold;
-    color: #00eaff; /* Warna biru neon */
+    animation: scrollText 10s linear infinite;
 }
 
-.footer .subtext {
-    font-size: 14px;
-    color: #ccc;
-    margin-top: 5px;
+@keyframes scrollText {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+/* ============================
+   RESPONSIVE MOBILE
+   ============================ */
+@media (max-width: 600px) {
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-size: 15px;
+    }
+
+    .container {
+        width: 95%;
+        padding: 10px;
+        margin: 0 auto;
+    }
+
+    #soalBox {
+        font-size: 15px;
+        line-height: 1.4;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        padding: 10px;
+        background: #f1f1f1;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    input[type="radio"] {
+        transform: scale(1.2);
+        margin-right: 8px;
+    }
+
+    #nextBtn {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        margin-top: 15px;
+    }
+
+    .footer {
+        text-align: center;
+        font-size: 13px;
+        padding: 15px 5px;
+    }
+
+    .kotak-review {
+        padding: 10px;
+        font-size: 14px;
+    }
+
+    h2, h3 {
+        font-size: 20px;
+    }
+
+}
+
+body {
+    box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+    .btn-back {
+        top: 10px;
+        left: 10px;
+        padding: 8px 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .btn-back {
+        top: 10px;
+        left: 10px;
+        padding: 8px 10px;
+    }
+}
+
+
+#judulMapel {
+    margin-top: 50px;
 }
