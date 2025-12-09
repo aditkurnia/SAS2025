@@ -126,3 +126,35 @@ input[type="radio"] {
         padding: 12px;
     }
 }
+
+
+/* ===============================
+   FIX BUTTON BACK
+   =============================== */
+.btn-back {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 9999;
+
+    background: #0d6efd;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.btn-back i {
+    font-size: 24px;
+    color: white;
+}
+
+/* Agar tidak ketutup container */
+#judulMapel {
+    margin-top: 90px !important;
+}
