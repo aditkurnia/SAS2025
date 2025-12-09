@@ -1,154 +1,128 @@
-body {
-    font-family: Arial;
-    background: #f1f1f1;
-}
+/* ===============================
+   Mobile First UI – Aplikasi Ujian
+   =============================== */
 
-.container {
-    width: 90%;
-    max-width: 500px;
-    margin: auto;
-    background: white;
-    padding: 20px;
-    margin-top: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px #ccc;
-}
-
-.btn {
-    display: block;
-    padding: 12px;
-    margin: 10px 0;
-    background: #0d6efd;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-    border-radius: 8px;
-    font-size: 18px;
-}
-
-.btn:hover {
-    background: #0b5ed7;
-}
-
-.footer {
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    background: #111;
-    padding: 10px 0;
-    z-index: 999;
-}
-
-.marquee {
-    width: 100%;
-    overflow: hidden;
-}
-
-.marquee p {
-    display: inline-block;
-    padding-left: 100%;
-    white-space: nowrap;
-    color: #00eaff;
-    font-weight: bold;
-    animation: scrollText 10s linear infinite;
-}
-
-@keyframes scrollText {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-
-/* ============================
-   RESPONSIVE MOBILE
-   ============================ */
-@media (max-width: 400px) {
-
-    body {
-        margin: 0;
-        padding: 0;
-        font-size: 15px;
-    }
-
-    .container {
-        width: 95%;
-        padding: 10px;
-        margin: 0 auto;
-    }
-
-    #soalBox {
-        font-size: 15px;
-        line-height: 1.4;
-    }
-
-    label {
-        display: block;
-        margin-bottom: 8px;
-        padding: 10px;
-        background: #f1f1f1;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    input[type="radio"] {
-        transform: scale(1.2);
-        margin-right: 8px;
-    }
-
-    #nextBtn {
-        width: 100%;
-        padding: 12px;
-        font-size: 16px;
-        margin-top: 15px;
-    }
-
-    .footer {
-        text-align: center;
-        font-size: 13px;
-        padding: 15px 5px;
-    }
-
-    .kotak-review {
-        padding: 10px;
-        font-size: 14px;
-    }
-
-    h2, h3 {
-        font-size: 20px;
-    }
-
-}
-
-body {
+* {
     box-sizing: border-box;
 }
 
-@media (max-width: 600px) {
-    .btn-back {
-        top: 10px;
-        left: 10px;
-        padding: 8px 10px;
-    }
+body {
+    font-family: Arial;
+    margin: 0;
+    padding: 0;
+    background: #f1f1f1;
 }
 
-@media (max-width: 600px) {
-    .btn-back {
-        top: 10px;
-        left: 10px;
-        padding: 8px 10px;
-    }
+/* Container utama penuh & responsif */
+.container {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    margin: 0;
 }
 
+/* Card soal */
+#soalBox,
+.kotak-review {
+    background: #fff;
+    padding: 18px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+    margin-bottom: 20px;
+}
 
+/* Judul mapel */
 #judulMapel {
-    margin-top: 50px;
+    margin-top: 80px;
+    text-align: left;
+    font-size: 22px;
+    font-weight: bold;
 }
 
+/* Pilihan jawaban */
+label {
+    display: block;
+    width: 100%;
+    background: #fafafa;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid #e8e8e8;
+    font-size: 16px;
+}
 
-/* =============================
-   FIX RESPONSIVE KHUSUS MOBILE
-   ============================= */
+input[type="radio"] {
+    transform: scale(1.3);
+    margin-right: 10px;
+}
+
+/* Tombol */
+.btn,
+#nextBtn {
+    width: 100%;
+    display: block;
+    padding: 14px;
+    margin-top: 15px;
+    background: #0d6efd;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.btn:hover,
+#nextBtn:hover {
+    background: #0b5ed7;
+}
+
+/* Tombol BACK */
+.btn-back {
+    position: fixed;
+    top: 20px;
+    left: 15px;
+    z-index: 999;
+    background: #0d6efd;
+    padding: 12px 15px;
+    border-radius: 50%;
+}
+
+/* Footer */
+.footer {
+    width: 100%;
+    background: #111;
+    color: white;
+    padding: 12px 0;
+    text-align: center;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+/* ===============================
+   RESPONSIVE MOBILE
+   =============================== */
+@media (max-width: 480px) {
+
+    #judulMapel {
+        margin-top: 90px;
+        font-size: 20px;
+    }
+
+    #soalBox,
+    .kotak-review {
+        padding: 15px;
+    }
+
+    label {
+        font-size: 15px;
+        padding: 12px;
+    }
+
+    #nextBtn {
+        font-size: 17px;
+        padding: 12px;
+    }
+}
